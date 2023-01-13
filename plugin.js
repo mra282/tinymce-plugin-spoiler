@@ -1,10 +1,10 @@
 tinymce.PluginManager.add('spoiler', function(editor){
-    const openDialog = function(){
+    var openDialog = function(){
         return editor.windowManager.open({
             title: `Insert a Spoiler Element`,
             body: {
                 type: `panel`,
-                itemes: [
+                items: [
                     {
                         type: `htmlpanel`,
                         html: `<div>Text that will be enclosed in the spoiler tags</div>`,
@@ -27,7 +27,7 @@ tinymce.PluginManager.add('spoiler', function(editor){
                     primary: true
                 }
             ],
-            onsubmit: function (api) {
+            onSubmit: function (api) {
                 var data = api.getData()
                 editor.insertContent(`<spoiler>${data.body}</spoiler>`)
                 api.close()
@@ -36,6 +36,7 @@ tinymce.PluginManager.add('spoiler', function(editor){
     }
     editor.ui.registry.addButton('spoiler',{
         text:`Spoiler`,
+        icon: 'warning',
         onAction: function(){
             openDialog()
         }
