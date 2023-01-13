@@ -1,4 +1,5 @@
-tinymce.PluginManager.add('spoiler', function(editor){
+tinymce.PluginManager.add('spoiler', function(editor, url){
+    tinymce.DOM.loadCSS(url +'/css/style.css')
     var openDialog = function(){
         return editor.windowManager.open({
             title: `Insert a Spoiler Element`,
@@ -29,11 +30,12 @@ tinymce.PluginManager.add('spoiler', function(editor){
             ],
             onSubmit: function (api) {
                 var data = api.getData()
-                editor.insertContent(`<spoiler>${data.body}</spoiler>`)
+                editor.insertContent(`<spoiler class="spoiler">${data.body}</spoiler>`)
                 api.close()
             }
         })
     }
+    
     editor.ui.registry.addButton('spoiler',{
         text:`Spoiler`,
         icon: 'warning',
